@@ -1,4 +1,4 @@
-use std::{arch::x86_64::_CMP_FALSE_OQ, collections::HashSet, io};
+use std::{collections::HashSet, io};
 
 fn main() {
     let target_word = "test";
@@ -58,8 +58,8 @@ fn main() {
                     
                 },
                 false => {
-                    println!("Letter not in word! -1 Lives!");
                     lives -= 1;
+                    println!("Letter not in word! -1 Lives! {lives} lives remaining");
                 }
             }
 
