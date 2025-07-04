@@ -10,8 +10,8 @@ fn main() {
     loop {
         let guessed_char = {
             loop {
+                println!("Enter Letter: ");
                 let mut user_in = String::new();
-                print!("Enter Letter: ");
                 io::stdin()
                 .read_line(&mut user_in)
                 .expect("Failed to read input!");
@@ -37,7 +37,6 @@ fn main() {
                     }
                     
 
-                    println!("");
                     past_guesses.insert(c);
                     break c;
                    } 
