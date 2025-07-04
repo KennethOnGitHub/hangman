@@ -1,7 +1,8 @@
-use std::{collections::HashSet, io};
+use std::{arch::x86_64::_CMP_FALSE_OQ, collections::HashSet, io};
 
 fn main() {
     let target_word = "test";
+    let mut lives = 10;
 
     // let letters = HashSet::from(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']);
 
@@ -18,7 +19,7 @@ fn main() {
 
                 let c = user_in.chars().next();
                 match c {
-                   Option::None => {
+                   Option::None => { //this path is never taken?
                     println!("No character entered!");
                     continue;},
 
@@ -35,17 +36,33 @@ fn main() {
                         println!("Character already guessed!");
                         continue;
                     }
-                    
-
-                    past_guesses.insert(c);
                     break c;
                    } 
                 }
                 }
             };
-        };
+
+            past_guesses.insert(guessed_char);
+
+            match target_word.contains(guessed_char) {
+                true => {
+                    let progress: String = target_word
+                        .chars()
+                        .map(
+                            |c| match past_guesses.contains(&c) {
+                                true => c,
+                                false => '_'})
+                        .collect();
+
+                    println!("{}", progress)
+                    
+                },
+                false => {
+                    println!("Letter not in word! -1 Lives!");
+                    lives -= 1;
+                }
+            }
 
 
-
-        
+        }; 
     }
