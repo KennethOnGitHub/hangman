@@ -1,12 +1,24 @@
-use std::{collections::HashSet, io};
+use std::{collections::HashSet, fs, io};
+const WORD_LIST_PATH: &str = "google-10000-english.txt";
+use rand::{self, seq::IndexedRandom};
 
 fn main() {
-    let target_word = "test";
+    let binding = fs::read_to_string(WORD_LIST_PATH)
+                             .expect("Word List Not Found!");
+    let word_list: Vec<&str> = binding.lines().collect();
+
+    // let word_list: Vec<&str> = fs::read_to_string(WORD_LIST_PATH)
+    //                                 .expect("Word List Not Found!")
+    //                                 .lines()
+    //                                 .collect();
+
+    let target_word = *word_list.choose(&mut rand::rng()).expect("Failed to generate word to guess!");
+
     let mut lives = 10;
 
-    // let letters = HashSet::from(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']);
-
     let mut past_guesses: HashSet<char> = HashSet::new();
+
+    println!("Guess the word! {}", "_".repeat(target_word.chars().count()));
 
     loop {
         let guessed_char = {
