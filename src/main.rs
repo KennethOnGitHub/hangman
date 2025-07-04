@@ -63,7 +63,16 @@ fn main() {
                 },
                 false => {
                     lives -= 1;
-                    println!("Letter not in word! -1 Lives! {lives} lives remaining");
+
+                    match lives {
+                        1.. => println!("Letter not in word! -1 Lives! {lives} lives remaining"),
+                        _ => {
+                            println!("You lose! Word was {target_word}");
+                            break;
+                        }
+                    }
+
+                    
                 }
             }
 
