@@ -54,6 +54,10 @@ fn main() {
                                 false => '_'})
                         .collect();
 
+                    if progress == target_word {
+                        println!("Correct! Word was {progress}");
+                        break;
+                    }
                     println!("{}", progress)
                     
                 },
