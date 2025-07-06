@@ -7,11 +7,6 @@ fn main() {
                              .expect("Word List Not Found!");
     let word_list: Vec<&str> = binding.lines().collect();
 
-    // let word_list: Vec<&str> = fs::read_to_string(WORD_LIST_PATH)
-    //                                 .expect("Word List Not Found!")
-    //                                 .lines()
-    //                                 .collect();
-
     let target_word = *word_list.choose(&mut rand::rng()).expect("Failed to generate word to guess!");
 
     let mut lives = 10;
@@ -31,7 +26,7 @@ fn main() {
 
                 let c = user_in.chars().next();
                 match c {
-                   Option::None => { //this path is never taken?
+                   Option::None => { //this path is never taken
                     println!("No character entered!");
                     continue;},
 
