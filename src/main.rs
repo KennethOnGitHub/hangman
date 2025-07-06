@@ -19,31 +19,33 @@ fn main() {
         let guessed_char = {
             loop {
                 println!("Enter Letter: ");
-                let mut user_in = String::new();
+                let mut user_input = String::new();
                 io::stdin()
-                .read_line(&mut user_in)
+                .read_line(&mut user_input)
                 .expect("Failed to read input!");
 
-                let c = user_in.chars().next();
-                match c {
-                   Option::None => { //this path is never taken
+                let whitespace_stripped_input = user_input.trim_end();
+
+                let first_char = whitespace_stripped_input.chars().next();
+                match first_char {
+                   Option::None => {
                     println!("No character entered!");
                     continue;},
 
-                   Option::Some(c) => {
-                    if user_in.trim_end().chars().count() > 1 {
+                   Option::Some(first_char) => {
+                    if whitespace_stripped_input.chars().count() > 1 {
                         println!("More than 1 character entered!");
                         continue;
                     }
-                    if !c.is_ascii_alphabetic() { //you MUST check ascii_alphabetic as alphabetic erronously allows for chinese characters
+                    if !first_char.is_ascii_alphabetic() { //you MUST check ascii_alphabetic as alphabetic erronously allows for chinese characters
                         println!("Character not alphabetic!");
                         continue;
                     }
-                    if past_guesses.contains(&c) {
+                    if past_guesses.contains(&first_char) {
                         println!("Character already guessed!");
                         continue;
                     }
-                    break c;
+                    break first_char;
                    } 
                 }
                 }
