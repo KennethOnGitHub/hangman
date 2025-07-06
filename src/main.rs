@@ -57,6 +57,7 @@ fn main() {
 
             past_guesses.insert(guessed_char);
 
+            //Below handles the actual guess logic
             match target_word.contains(guessed_char) {
                 true => {
                     let progress: String = target_word
