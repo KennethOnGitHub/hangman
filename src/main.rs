@@ -37,6 +37,10 @@ fn main() {
                         println!("More than 1 character entered!");
                         continue;
                     }
+
+                    //Upper and lowercase letters should be treated the same, e.g. 'E' and 'e' should be the same
+                    let first_char = first_char.to_ascii_lowercase();
+
                     if !first_char.is_ascii_alphabetic() { //you MUST check ascii_alphabetic as alphabetic erronously allows for chinese characters
                         println!("Character not alphabetic!");
                         continue;
